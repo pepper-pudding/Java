@@ -8,7 +8,4 @@
 * [Hash Time Complexity](group-1/hash-time-complexity.md)
 * [Hash Relay Quiz!](group-1/hash-relay-quiz.md)
 * [HashMap vs TreeMap](group-1/hashmap-vs-treemap.md)
-
-## Group 2
-
-* [NonNetworkNodeHelper](group-2/nonnetworknodehelper.md)
+* [HashSet vs TreeSet](group-1/hashset-vs-treeset.md)
