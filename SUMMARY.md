@@ -2,10 +2,10 @@
 
 * [ReadMe](README.md)
 
-## Group 1
+## Hash
 
-* [Hash Collision](group-1/hash-collision.md)
-* [Hash Time Complexity](group-1/hash-time-complexity.md)
-* [Hash Relay Quiz!](group-1/hash-relay-quiz.md)
-* [HashMap vs TreeMap](group-1/hashmap-vs-treemap.md)
-* [HashSet vs TreeSet](group-1/hashset-vs-treeset.md)
+* [Hash Collision](hash/hash-collision.md)
+* [Hash Time Complexity](hash/hash-time-complexity.md)
+* [Hash Relay Quiz!](hash/hash-relay-quiz.md)
+* [HashMap vs TreeMap](hash/hashmap-vs-treemap.md)
+* [HashSet vs TreeSet](hash/hashset-vs-treeset.md)
