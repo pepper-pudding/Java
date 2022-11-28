@@ -4,6 +4,7 @@
 
 ## Hash
 
+* [Hash Table](hash/hash-table.md)
 * [Hash Collision](hash/hash-collision.md)
 * [Hash Time Complexity](hash/hash-time-complexity.md)
 * [Hash Relay Quiz!](hash/hash-relay-quiz.md)
