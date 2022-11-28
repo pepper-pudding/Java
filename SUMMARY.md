@@ -2,4 +2,4 @@
 
 ## Group 1
 
-* [Page 2](README.md)
+* [Hash Collistion](README.md)
