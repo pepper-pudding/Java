@@ -1,4 +1,4 @@
-# Hash Collistion
+# Hash Collision
 
 ## Hash function
 
