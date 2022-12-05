@@ -12,7 +12,7 @@
 
 해시 테이블의 기본 방식이기도 한 개별 체이닝(Separate Chaining)은 충돌 발생 시 그림과 같이 **연결 리스트로 연결하는 방식**이다.
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 Separate Chaining에서 각 배열의 인자는 인덱스가 같은 해시 버킷을 연결한 링크드 리스트의 첫 부분(head)이다.
 
@@ -38,7 +38,7 @@ Separate Chaining에서 각 배열의 인자는 인덱스가 같은 해시 버�
 
 ## Hash 충돌로 인한 성능 저하
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (2).png" alt=""><figcaption></figcaption></figure>
 
 충돌로 인한 성능 저하를 막을 수 없다. 그림과 같이 **수용률이 일정량을 넘어서게 되면 저장/조회 성능이 모두 점점 떨어진다**.
 

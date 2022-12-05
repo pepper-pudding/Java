@@ -126,7 +126,7 @@ putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 * Lock을 사용하지 않고 [Compare and Swap](https://jenkov.com/tutorials/java-concurrency/compare-and-swap.html)을 이용하여 새로운 노드를 해시 버킷에 삽입합니다. (원자성 보장)
 * (Java에는 synchronized 말고도 다른 동기화 방식이 있는데 그 중에 하나를 사용한 것입니다.)
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 (1) 무한 루프. table은 내부적으로 관리하는 가변 배열입니다.
 
@@ -148,7 +148,7 @@ CAS 구현은 `java.util.concurrent.atomic` 패키지의 `Atomic*` 클래스들�
 * `synchronized(노드가 존재하는 해시 버킷 객체)`를 이용해 하나의 스레드만 접근할 수 있도록 제어합니다.
 * **서로 다른 스레드가 같은 해시 버킷에 접근할 때만 해당 블록이 잠기게 됩니다.**
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 synchronized 안의 로직은 HashMap 과 비슷한 로직입니다. 동일한 Key이면 Node 를 새로운 노드로 바꾸고, 해시 충돌(hash collision)인 경우에는 Separate Chaining에 추가하거나 TreeNode에 추가합니다. `TREEIFY_THRESHOLD` 값에 따라 체이닝을 트리로 바꿉니다.
 
