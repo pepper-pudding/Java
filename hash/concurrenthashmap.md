@@ -121,72 +121,38 @@ DEFAULT\_CAPACITY는 HashMap에서 보았듯이 버킷의 수입니다. 그리�
 
 putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 
-```
-final V putVal(K key, V value, boolean onlyIfAbsent) {
-        if (key == null || value == null) throw new NullPointerException();
-        int hash = spread(key.hashCode());
-        int binCount = 0;
-        for (Node<K,V>[] tab = table;;) {
-            Node<K,V> f; int n, i, fh;
-            if (tab == null || (n = tab.length) == 0)
-                tab = initTable();
-            else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
-                if (casTabAt(tab, i, null,
-                             new Node<K,V>(hash, key, value, null)))
-                    break;                   // no lock when adding to empty bin
-            }
-```
+#### 1. 빈 해시 커빗에 노드를 삽입하는 경우
 
-위의 코드는 putVal() 메소드 중 빈 버킷에 노드를 삽입하는 부분입니다.
+* Lock을 사용하지 않고 [Compare and Swap](https://jenkov.com/tutorials/java-concurrency/compare-and-swap.html)을 이용하여 새로운 노드를 해시 버킷에 삽입합니다. (원자성 보장)
+* (Java에는 synchronized 말고도 다른 동기화 방식이 있는데 그 중에 하나를 사용한 것입니다.)
 
-이 과정에서는 [Compare and Swap](https://jenkov.com/tutorials/java-concurrency/compare-and-swap.html) 방식을 이용하여 새로운 노드를 해시 버킷에 삽입합니다.
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-(Java에는 synchronized 말고도 다른 동기화 방식이 있는데 그 중에 하나를 사용한 것입니다.)
+(1) 무한 루프. table은 내부적으로 관리하는 가변 배열입니다.
 
-```
-            else {
-                V oldVal = null;
-                // synchronized 사용
-                synchronized (f) {
-                    if (tabAt(tab, i) == f) {
-                        if (fh >= 0) {
-                            binCount = 1;
-                            for (Node<K,V> e = f;; ++binCount) {
-                                K ek;
-                                // 새로운 노드로 교체
-                                if (e.hash == hash &&
-                                    ((ek = e.key) == key ||
-                                     (ek != null && key.equals(ek)))) {
-                                    oldVal = e.val;
-                                    if (!onlyIfAbsent)
-                                        e.val = value;
-                                    break;
-                                }
-                                Node<K,V> pred = e;
-                                // Seperate Chaining에 추가
-                                if ((e = e.next) == null) {
-                                    pred.next = new Node<K,V>(hash, key,
-                                                              value, null);
-                                    break;
-                                }
-                            }
-                        }
-                        // 트리에 추가
-                        else if (f instanceof TreeBin) {
-                            Node<K,V> p;
-                            binCount = 2;
-                            if ((p = ((TreeBin<K,V>)f).putTreeVal(hash, key,
-                                                           value)) != null) {
-                                oldVal = p.val;
-                                if (!onlyIfAbsent)
-                                    p.val = value;
-                            }
-                        }
-                    }
-                }
-```
+(2) 새로운 노드를 삽입하기 위해, 해당 버킷 값을 가져와(tabAt 함수) 비어 있는지 확인합니다.(== null)&#x20;
 
-위의 코드는 putVal() 메소드 중 버킷에 이미 노드가 존재하는 경우에 실행되는 코드입니다. synchronized(노드가 존재하는 해시 버킷 객체)를 이용해서 하나의 쓰레드만 접근할 수 있도록 제어합니다.
+(3) 다시 Node를 담고 있는 [volatile](https://nesoy.github.io/articles/2018-06/Java-volatile) 변수에 접근하여 Node와 기대값(null)을 비교하여(casTabAt 함수) 같으면 새로운 Node를 생성해 넣고, 아니면 (1)번으로 돌아갑니다.(재시도)
+
+
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+[volatile](https://nesoy.github.io/articles/2018-06/Java-volatile) 변수에 2번 접근하는 동안 원자성(atomic)을 보장하기 위해 기대되는 값과 비교(Compare)하여 맞는 경우에 새로운 노드를 넣습니다(Swap).\
+CAS 구현은 `java.util.concurrent.atomic` 패키지의 `Atomic*` 클래스들과 동일하게 내부적으로 `sun.misc.Unsafe`을 사용하고 있습다. (Unsafe 는 jdk11 부터 없어졌다고 합니다.)
+
+
+
+#### 2. 이미 노드가 존재하는 경우
+
+* `synchronized(노드가 존재하는 해시 버킷 객체)`를 이용해 하나의 스레드만 접근할 수 있도록 제어합니다.
+* **서로 다른 스레드가 같은 해시 버킷에 접근할 때만 해당 블록이 잠기게 됩니다.**
+
+<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+synchronized 안의 로직은 HashMap 과 비슷한 로직입니다. 동일한 Key이면 Node 를 새로운 노드로 바꾸고, 해시 충돌(hash collision)인 경우에는 Separate Chaining에 추가하거나 TreeNode에 추가합니다. `TREEIFY_THRESHOLD` 값에 따라 체이닝을 트리로 바꿉니다.
+
+
 
 ## &#x20;ConcurrentHashMap 생성자
 
@@ -228,7 +194,7 @@ ConcurrentHashMap은 **다른 버킷이라면 동시에 쓸 수 있다**고 했�
 
 ## 가변 배열 리사이징
 
-HashMap에서 버킷안에 노드가 로드팩터 값에 도달하게 되면 단순히 resize() 메소드를 통해 새로운 배열을 만들어 copy 하는 방식을 사용합니다.\
+HashMap에서 버킷 안에 노드가 로드팩터 값에 도달하게 되면 단순히 resize() 메소드를 통해 새로운 배열을 만들어 copy하는 방식을 사용합니다.\
 하지만 ConcurrentHashMap 에서는 기존 테이블을 새로운 테이블로 버킷을 하나씩 전송(transfer) 하는 방식을 사용합니다. 이 과정에서 다른 쓰레드가 버킷 전송을 같이 할 수도 있습니다. Transfer가 모두 끝나면 크기가 2배인 새로운 테이블이 됩니다.
 
 
