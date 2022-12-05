@@ -10,14 +10,18 @@ description: >-
 
 Hash 충돌 처리에는 크게 두 가지 기법이 있습니다. 각각 (Separate) Chaining 방식과 Open Address 방식이라고 부릅니다. 이에 대해 동작 방식을 간단하게 설명해주세요.
 
+➔ 아래 페이지에서 자세하게 소개하고 있습니다!
+
+{% content-ref url="hash-collision.md" %}
+[hash-collision.md](hash-collision.md)
+{% endcontent-ref %}
+
 \
 
 
 ### 문제 2 <a href="#eb-ac-b8-ec-a0-9c-2" id="eb-ac-b8-ec-a0-9c-2"></a>
 
 길이 10의 해쉬 테이블(index 0 \~ 9)이 있습니다. 해쉬 함수 h(k) = k mod 10 일 때, 다음의 조건에 맞게 키 값 106, 204, 52, 73, 82, 13 를 순서대로 해쉬 테이블에 추가하세요. (화이트 보드 사용)
-
-
 
 #### 문제 2-1 <a href="#eb-ac-b8-ec-a0-9c-2-1" id="eb-ac-b8-ec-a0-9c-2-1"></a>
 
@@ -54,3 +58,94 @@ Chaining 방식을 사용하는 길이 10의 해쉬 테이블(index 0 \~ 9)이 �
 2. h(i) = (11 \* i^2) mod 10
 3. h(i) = i^2 mod 10
 4. h(i) = i^3 mod 10
+
+➔ 일단 생각하기 전에 직접 테스트를 해봤는데 2, 3, 4번은 모두 동일한 분포를 보이는 듯 하네요... \
+&#x20;   제가 뭔가 잘못한 걸까요?
+
+```
+import java.util.Map;
+import java.util.HashMap;
+
+public class hash {
+	public static void main(String[] args) {
+		Map<Integer, Integer> map = new HashMap<>();
+		int num = 3060;
+		
+		for(int i = 0; i <= num; i++) {
+			int index = hashFunction1(i);
+			if(map.containsKey(index))
+				map.put(index, map.get(index) + 1);
+			else
+				map.put(index, 1);
+		}
+
+		System.out.println("(12 * key) mod 10 결과");
+		for( int key : map.keySet() ) {
+            		System.out.println( String.format("키 : %s, 값 : %s", key, map.get(key)) );
+        	}
+		System.out.println("----------------------");
+
+		map.clear();
+		for(int i = 0; i <= num; i++) {
+			int index = hashFunction2(i);
+			if(map.containsKey(index))
+				map.put(index, map.get(index) + 1);
+			else
+				map.put(index, 1);
+		}
+
+		System.out.println("(11 * key ^ 2) % 10 결과");
+		for( int key : map.keySet() ) {
+			System.out.println( String.format("키 : %s, 값 : %s", key, map.get(key)) );
+		}
+		System.out.println("----------------------");
+
+		map.clear();
+		for(int i = 0; i <= num; i++) {
+			int index = hashFunction3(i);
+			if(map.containsKey(index))
+				map.put(index, map.get(index) + 1);
+			else
+				map.put(index, 1);
+		}
+
+		System.out.println("(key ^ 2) mod 10 결과");
+		for( int key : map.keySet() ) {
+			System.out.println( String.format("키 : %s, 값 : %s", key, map.get(key)) );
+		}
+		System.out.println("----------------------");
+
+		map.clear();
+		for(int i = 0; i <= num; i++) {
+			int index = hashFunction4(i);
+			if(map.containsKey(index))
+				map.put(index, map.get(index) + 1);
+			else
+				map.put(index, 1);
+		}
+
+		System.out.println("(key ^ 3) mod 10 결과");
+		for( int key : map.keySet() ) {
+			System.out.println( String.format("키 : %s, 값 : %s", key, map.get(key)) );
+		}
+	}
+
+	public static int hashFunction1(int key) {
+		return (12 * key) % 10;
+	}
+
+	public static int hashFunction2(int key) {
+		return (11 * key ^ 2) % 10;
+	}
+
+	public static int hashFunction3(int key) {
+		return (key ^ 2) % 10;
+	}
+
+	public static int hashFunction4(int key) {
+		return (key ^ 3) % 10;
+	}
+}
+```
+
+<figure><img src="../.gitbook/assets/스크린샷 2022-12-04 오후 7.53.43.png" alt=""><figcaption></figcaption></figure>

@@ -12,9 +12,13 @@
 
 해시 테이블의 기본 방식이기도 한 개별 체이닝(Separate Chaining)은 충돌 발생 시 그림과 같이 **연결 리스트로 연결하는 방식**이다.
 
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Separate Chaining에서 각 배열의 인자는 인덱스가 같은 해시 버킷을 연결한 링크드 리스트의 첫 부분(head)이다.
+
 ### Open Addressing
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 오픈 어드레싱(Open Addressing)이란 추가적인 메모리를 사용하는 Chaining 방식과 다르게 비어있는 해시 테이블의 공간을 활용하는 방법이다. Open Addressing을 구현하기 위한 대표적인 방법으로는 3가지 방식이 존재한다.
 
@@ -34,7 +38,7 @@
 
 ## Hash 충돌로 인한 성능 저하
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 충돌로 인한 성능 저하를 막을 수 없다. 그림과 같이 **수용률이 일정량을 넘어서게 되면 저장/조회 성능이 모두 점점 떨어진다**.
 
@@ -57,3 +61,8 @@
 | Go     | 개별 체이닝  |
 | Ruby   | 오픈 어드레싱 |
 | Python | 오픈 어드레싱 |
+
+
+
+### 시간복잡도 비교
+

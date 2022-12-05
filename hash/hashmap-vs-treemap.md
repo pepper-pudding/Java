@@ -1,54 +1,67 @@
----
-description: HashMap vs TreeMap에 대해 할 말 다 하시오.
----
+# HashMap vs HashTable
 
-# HashMap vs TreeMap
+## HashMap과 HashTable의 차이
 
-## HashMap
+HashMap과 HashTable이 제공하는 기능은 같습니다.&#x20;
 
-{% embed url="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html" %}
+이들을 정의한다면 **키에 대한 해시 값을 사용하여 값을 저장하고 조회하며, 키-값 쌍의 개수에 따라 동적으로 크기가 증가하는 associate array**라고 할 수 있습니다. 이 associate array를 지칭하는 다른 용어가 있는데, 대표적으로 Map, Dictionary, Symbol Table 등입니다.
 
-HashMap은 Map 인터페이스를 구현한 대표적인 Map Collection입니다.
+HashMap과 HashTable 사이에는 약간의 차이점이 있는데 이는 아래의 표와 같습니다.
 
-Map 인터페이스를 상속하고 있기에 Map의 성질을 그대로 가지고 있습니다. Map은 키와 값으로 구성된 Entry 객체를 저장하는 구조를 가지고 있는 자료구조입니다. 여기서 키와 값은 모두 객체입니다. 값은 중복 저장될 수 있지만 키는 중복 저장될 수 없습니다. 만약 기존에 저장된 키와 동일한 키로 값을 저장하면 기존의 값은 없어지고 새로운 값으로 대치됩니다.&#x20;
+|                                               | HashTable | HashMap |
+| :-------------------------------------------: | :-------: | :-----: |
+|                  Thread-Safe                  |     O     |    X    |
+|                  Synchronize                  |     O     |    X    |
+|                     Speed                     |   Slower  |  Faster |
+|             nullable (key, value)             |     X     |    O    |
+| <p>Additional Hash Function<br>(보조 해시 함수)</p> |     X     |    O    |
 
-HashMap은 해싱을 사용하기 때문에 많은 양의 데이터를 검색하는 데 있어서 뛰어난 성능을 보입니다.
+### Thread-Safety & Speed
 
-### HashTable과 HashMap의 차이
+#### HashTable 클래스
 
-HashMap과 사용법이 거의 동일한 컬렉션(Collection)에는 HashTable이 있습니다. 두 클래스의 차이점은 **Thread-Safe 여부**에 있습니다.
+```
+public class Hashtable<K, V> extends Dictionary<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
+    public synchronized int size() { }
+    
+    @SuppressWarnings("unchecked")
+    public synchronized V get(Object key) { }
+    
+    public synchronized V put(K key, V value) { }
+}
+```
 
-|                       | HashTable | HashMap |
-| :-------------------: | :-------: | :-----: |
-|      Thread-Safe      |     O     |    X    |
-|      Synchronize      |     O     |    X    |
-|         Speed         |   Slower  |  Faster |
-| nullable (key, value) |     X     |    O    |
+Hashtable 클래스의 대부분의 API를 보면 위와 같이 메소드 전체에 synchronized 키워드가 존재하는 것을 볼 수 있습니다. (메소드 전체가 임계 구역으로 설정됩니다.)
 
-****
+{% content-ref url="synchronized.md" %}
+[synchronized.md](synchronized.md)
+{% endcontent-ref %}
 
-HashMap의 인스턴스에는 성능에 영향을 미치는 두 가지 매개변수가 있다.
+그렇기 때문에 Multi-Thread 환경에서는 나쁘지 않을 수도 있습니다.
 
-1. 초기 용량
-2. 로드 비율
+하지만 동시에 작업을 하려고 해도 객체마다 Lock을 하나씩 가지고 있기 때문에 동시에 여러 작업을 해야할 때 병목현상이 발생할 수 밖에 없습니다. (메소드에 접근하게 되면 다른 쓰레드는 Lock을 얻을 때까지 기다려야 하기 때문입니다.)
 
-용량 은 해시 테이블 의 버킷 수이고 초기 용량은 단순히 해시 테이블이 생성된 시점의 용량입니다. 로드 팩터 는 용량이 자동으로 증가하기 전에 해시 테이블이 얼마나 가득 찰 수 있는지를 측정한 것입니다 . 해시 테이블의 항목 수가 로드 팩터와 현재 용량의 곱을 초과하면 해시 테이블이 버킷 수의 약 2배가 되도록 해시 테이블이 다시 해시됩니다(즉, 내부 데이터 구조가 다시 작성됨).
+Hashtable 클래스는 Thread-safe 하긴 하지만, 위와 같은 특징 때문에 멀티쓰레드 환경에서 사용하기에도 살짝 느리다는 단점이 있습니다. 또한 Collection Framework가 나오기 이전부터 존재하는 클래스이기 때문에 최근에는 잘 사용하지 않는 클래스입니다.
 
-\
-일반적으로 기본 부하 계수(.75)는 시간과 공간 비용 간에 적절한 절충안을 제공합니다. 값이 높을수록 공간 오버헤드는 줄어들지만 조회 비용은 증가합니다( get 및 put 을 포함하여 HashMap 클래스 의 대부분의 작업에 반영됨 ). 재해시 작업의 수를 최소화하기 위해 초기 용량을 설정할 때 맵의 예상 항목 수와 로드 요소를 고려해야 합니다. 초기 용량이 로드 팩터로 나눈 최대 항목 수보다 큰 경우 재해시 작업이 발생하지 않습니다.
+#### HashMap 클래스
 
+```
+public class HashMap<K, V> extends AbstractMap<K, V> implemets Map<K, V>, Clonable, Serializable {
+    public V get(Object key) { }
+    public V put(K key, V value) { }
+}
+```
 
+HashMap 클래스를 보면 synchronized 키워드가 존재하지 않습니다. 그렇기 때문에 Map 인터페이스를 구현한 클래스 중에서 성능이 제일 좋다고 할 수 있습니다. 하지만 synchronized 키워드가 존재하지 않기 때문에 Multi-Thread 환경에서 사용할 수 없다는 특징을 가지고 있습니다.
 
-HashMap 인스턴스 에 많은 매핑을 저장 해야 하는 경우 충분히 큰 용량으로 생성하면 테이블을 확장하기 위해 필요에 따라 자동 재해싱을 수행하는 것보다 매핑을 더 효율적으로 저장할 수 있습니다. 동일한 키를 여러 개 사용 `hashCode()`하는 것은 모든 해시 테이블의 성능을 저하시키는 확실한 방법입니다. 영향을 개선하기 위해 키가 [`Comparable`](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)인 경우 이 클래스는 키 간의 비교 순서를 사용하여 관계를 끊을 수 있습니다.
+멀티 쓰레드 환경이 아니라면 HashMap을 사용하기에 대체적으로 적합하겠지만, 멀티 쓰레드 환경이라면 HashMap 클래스도 Hashtable 클래스의 대안이 될 수는 없습니다.
 
+그러면 Hashtable 클래스보다는 더 빠르고 Multi-Thread 환경에서 쓸 수 있는 클래스는 없을까요?
 
+➔ ConcurrentHashMap!
 
-
-
-****
-
-****
-
-{% embed url="https://reakwon.tistory.com/151" %}
+{% content-ref url="concurrenthashmap.md" %}
+[concurrenthashmap.md](concurrenthashmap.md)
+{% endcontent-ref %}
 
 ****
