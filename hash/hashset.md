@@ -4,8 +4,8 @@
 
 HashSet은 Set 인터페이스의 구현 클래스입니다. 그렇기에 Set의 성질을 그대로 상속받습니다. Set은 객체를 중복해서 저장할 수 없고 하나의 null 값만 저장할 수 있습니다. 또한 저장 순서가 유지되지 않습니다. 만약 요소의 저장 순서를 유지해야 한다면 JDK 1.4부터 제공하는 LinkedHashSet 클래스를 사용하면 됩니다.&#x20;
 
-{% content-ref url="linkedhashset.md" %}
-[linkedhashset.md](linkedhashset.md)
+{% content-ref url="../linked/linkedhashset.md" %}
+[linkedhashset.md](../linked/linkedhashset.md)
 {% endcontent-ref %}
 
 

@@ -16,10 +16,8 @@
   * [synchronized](hash/hashmap-vs-treemap/synchronized.md)
 * [ConcurrentHashMap](hash/concurrenthashmap/README.md)
   * [Compare And Swap](hash/concurrenthashmap/compare-and-swap.md)
-* [LinkedHashMap](hash/linkedhashmap.md)
 * [HashMap vs TreeMap](hash/hashmap-vs-treemap-1.md)
 * [HashSet](hash/hashset.md)
-* [LinkedHashSet](hash/linkedhashset.md)
 * [HashSet vs TreeSet](hash/hashset-vs-treeset.md)
 
 ## Tree
@@ -28,10 +26,16 @@
   * [이진 탐색 트리 vs 레드-블랙 트리](tree/treemap/vs.md)
 * [TreeSet](tree/treeset.md)
 
-## List
+## Array
 
-* [ArrayList](list/arraylist.md)
-* [LinkedList](list/linkedlist.md)
-* [LinkedList의 구현](list/linkedlist-1.md)
-* [ArrayList vs LinkedList](list/arraylist-vs-linkedlist.md)
-* [ConcurrentLinkedQueue](list/concurrentlinkedqueue.md)
+* [ArrayList](array/arraylist.md)
+* [ArrayDequeue](array/arraydequeue.md)
+
+## Linked
+
+* [LinkedList](linked/linkedlist.md)
+* [LinkedList의 구현](linked/linkedlist-1.md)
+* [ArrayList vs LinkedList](linked/arraylist-vs-linkedlist.md)
+* [LinkedHashMap](linked/linkedhashmap.md)
+* [LinkedHashSet](linked/linkedhashset.md)
+* [ConcurrentLinkedQueue](linked/concurrentlinkedqueue.md)
