@@ -10,6 +10,16 @@ Map 인터페이스를 상속하고 있기에 Map의 성질을 그대로 가지�
 
 HashMap은 해싱을 사용하기 때문에 많은 양의 데이터를 검색하는 데 있어서 뛰어난 성능을 보입니다.
 
+
+
+## HashMap의 구현
+
+{% content-ref url="hashmap.md" %}
+[hashmap.md](hashmap.md)
+{% endcontent-ref %}
+
+
+
 ## 해시 분포와 해시 충돌
 
 HashMap은 기본적으로 각 객체의 hashCode() 메서드가 반환하는 값을 사용하는데, 결과 자료형은 int입니다. 32비트 정수 자료형으로는 완전한 해시 함수를 만들 수 없습니다.&#x20;

@@ -20,6 +20,7 @@
   * [이진 탐색 트리 vs 레드-블랙 트리](hash/treemap/vs.md)
 * [HashMap vs TreeMap](hash/hashmap-vs-treemap-1.md)
 * [HashSet](hash/hashset.md)
+* [LinkedHashSet](hash/linkedhashset.md)
 * [TreeSet](hash/treeset.md)
 * [HashSet vs TreeSet](hash/hashset-vs-treeset.md)
 

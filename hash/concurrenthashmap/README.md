@@ -130,7 +130,7 @@ putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 [compare-and-swap.md](compare-and-swap.md)
 {% endcontent-ref %}
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 (1) 무한 루프. table은 내부적으로 관리하는 가변 배열입니다.
 
@@ -140,7 +140,7 @@ putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 [volatile](https://nesoy.github.io/articles/2018-06/Java-volatile) 변수에 2번 접근하는 동안 원자성(atomic)을 보장하기 위해 기대되는 값과 비교(Compare)하여 맞는 경우에 새로운 노드를 넣습니다(Swap).\
 CAS 구현은 `java.util.concurrent.atomic` 패키지의 `Atomic*` 클래스들과 동일하게 내부적으로 `sun.misc.Unsafe`을 사용하고 있습다. (Unsafe 는 jdk11 부터 없어졌다고 합니다.)

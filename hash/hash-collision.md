@@ -12,7 +12,7 @@
 
 해시 테이블의 기본 방식이기도 한 개별 체이닝(Separate Chaining)은 충돌 발생 시 그림과 같이 **연결 리스트로 연결하는 방식**이다.
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 Separate Chaining에서 각 배열의 인자는 인덱스가 같은 해시 버킷을 연결한 링크드 리스트의 첫 부분(head)이다.
 
