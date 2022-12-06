@@ -1,3 +1,2 @@
-# LinkedHashMap의 구현
+# LinkedHashMap
 
-{% embed url="https://sabarada.tistory.com/120" %}
