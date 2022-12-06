@@ -60,8 +60,8 @@ HashMap 클래스를 보면 synchronized 키워드가 존재하지 않습니다.
 
 ➔ ConcurrentHashMap!
 
-{% content-ref url="concurrenthashmap.md" %}
-[concurrenthashmap.md](concurrenthashmap.md)
+{% content-ref url="../concurrenthashmap/" %}
+[concurrenthashmap](../concurrenthashmap/)
 {% endcontent-ref %}
 
 ****
