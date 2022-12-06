@@ -32,4 +32,6 @@
 
 * [ArrayList](list/arraylist.md)
 * [LinkedList](list/linkedlist.md)
+* [LinkedList의 구현](list/linkedlist-1.md)
+* [ArrayList vs LinkedList](list/arraylist-vs-linkedlist.md)
 * [ConcurrentLinkedQueue](list/concurrentlinkedqueue.md)
