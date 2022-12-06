@@ -22,7 +22,7 @@ Set의 가장 큰 장점은 **중복을 자동으로 제거**해준다는 점입
 
 HashSet은 HashMap 객체 참조 변수를 가집니다.&#x20;
 
-```
+```java
 private transient HashMap<E, Object> map;
 
 // Dummy value to associate with an Object in the backing Map
@@ -33,7 +33,7 @@ private static final Object PRESENT = new Object();
 
 HashSet 생성자를 보면, 새로운 HashMap 객체를 만들어서 참조 변수에 넣는 것을 볼 수 있습니다.
 
-```
+```java
 /**
  * Constructs a new, empty set; the backing HashMap
  * default initial capacity (16) and load factor (0.75).
@@ -47,13 +47,14 @@ public HashSet() {
 
 Map은 key와 value 모두 필요합니다. 그런데 HashSet은 외부에서 key에 해당하는 데이터만 받습니다. 따라서 미리 만들어둔 Object인 PRESENT를 map.add()할 때 value로 넣어줍니다.
 
-```
+```java
  /**
   * Adds the specified element to this set if it is not already present.
   * More formally, adds the specified element e to this set if
   * this set contains no element e2 such that e.equals(e2).
   * If this set already contains the element, the call leaves the set
   * unchanged and returns false.
+  */
  public boolean add(E e) {
      return map.put(e, PRESENT)==null;
  }
@@ -63,9 +64,9 @@ Map은 key와 value 모두 필요합니다. 그런데 HashSet은 외부에서 ke
 
 참고로, value 값으로 넣어주는 Dummy Object인 PRESENT는,  HashSet 내부의 HashMap에서도 공유하고, 다른 HashSet끼리도 공유합니다.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>HashSet 내부의 HashMap에서 공유</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption><p>HashSet 내부의 HashMap에서 공유</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>HashSet끼리 공유</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>HashSet끼리 공유</p></figcaption></figure>
 
 ### 중복을 제거하는 방법
 
@@ -99,7 +100,7 @@ HashSet의 iterate 메서드에 의해 반환된 iterator들은 fail-fast 방식
 
 일반적으로 [`Collections.synchronizedSet`](https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedSet\(java.util.Set\)) 메서드를 사용하여 HashSet을 래핑하는 방식을 통해 우발적인 비동기 엑세스를 방지합니다.
 
-```
+```java
    Set s = Collections.synchronizedSet(new HashSet(...));
 ```
 

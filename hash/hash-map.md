@@ -28,7 +28,7 @@ HashMap은 기본적으로 각 객체의 hashCode() 메서드가 반환하는 �
 
 따라서 HashMap을 비롯한 많은 해시 함수를 이용하는 associative array 구현체에서는 메모리를 절약하기 위하여 실제 해시 함수의 표현 정수 범위보다, M개의 원소가 있는 배열만을 사용합니다. 따라서 다음과 같이 객체에 대한 해시 코드의 나머지 값을 해시 버킷 인덱스 값으로 사용합니다.
 
-```
+```java
 int index = X.hashCode() % M;
 ```
 
@@ -51,7 +51,7 @@ Java HashMap에서 사용하는 방식은 **Separate Channing**입니다.&#x20;
 
 Seperate Chaining 방식을 사용하고 있음을 알 수 있습니다.
 
-```
+```java
 public V put(K key, V value) { if (table == EMPTY_TABLE) { inflateTable(threshold); // table 배열 생성 } // HashMap에서는 null을 키로 사용할 수 있다. if (key == null) return putForNullKey(value); // value.hashCode() 메서드를 사용하는 것이 아니라, 보조 해시 함수를 이용하여 // 변형된 해시 함수를 사용한다. "보조 해시 함수" 단락에서 설명한다.  
     int hash = hash(key);
 
@@ -129,7 +129,7 @@ $$
 
 
 
-```
+```java
 static final int TREEIFY_THRESHOLD = 8;
 
 static final int UNTREEIFY_THRESHOLD = 6;
@@ -159,9 +159,7 @@ $$
 
 HashMap 생성자의 인자로 초기 해시 버킷 개수를 지정할 수 있으므로, 해당 HashMap 객체에 저장될 데이터의 개수가 어느 정도인지 예측 가능한 경우에는 이를 생성자의 인자로 지정하면 불필요하게 Separate Chaining을 재구성하지 않게 할 수 있습니다.
 
-
-
-<pre><code>// 인자로 사용하는 newCapacity는 언제나 2a이다.
+<pre class="language-java"><code class="lang-java">// 인자로 사용하는 newCapacity는 언제나 2a이다.
 void resize(int newCapacity) {  
     Entry[] oldTable = table;
     int oldCapacity = oldTable.length;
@@ -183,7 +181,7 @@ void resize(int newCapacity) {
 }
 </code></pre>
 
-```
+```java
 void transfer(Entry[] newTable, boolean rehash) {
     int newCapacity = newTable.length;
     // 모든 해시 버킷을 순회하면서

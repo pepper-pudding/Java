@@ -14,7 +14,7 @@ Hashtable, HashMap, ConcurrentHashMap 클래스 모두 Map의 기능적으로만
 
 그러면 어떤 동기화 방식을 사용하고 어떤 특징이 있길래 Hashtable의 대안 클래스가 될 수 있을까요?
 
-```
+```java
 public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     implements ConcurrentMap<K,V>, Serializable {
 
@@ -140,7 +140,7 @@ putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 
 
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 [volatile](https://nesoy.github.io/articles/2018-06/Java-volatile) 변수에 2번 접근하는 동안 원자성(atomic)을 보장하기 위해 기대되는 값과 비교(Compare)하여 맞는 경우에 새로운 노드를 넣습니다(Swap).\
 CAS 구현은 `java.util.concurrent.atomic` 패키지의 `Atomic*` 클래스들과 동일하게 내부적으로 `sun.misc.Unsafe`을 사용하고 있습다. (Unsafe 는 jdk11 부터 없어졌다고 합니다.)
@@ -152,7 +152,7 @@ CAS 구현은 `java.util.concurrent.atomic` 패키지의 `Atomic*` 클래스들�
 * `synchronized(노드가 존재하는 해시 버킷 객체)`를 이용해 하나의 스레드만 접근할 수 있도록 제어합니다.
 * **서로 다른 스레드가 같은 해시 버킷에 접근할 때만 해당 블록이 잠기게 됩니다.**
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 synchronized 안의 로직은 HashMap 과 비슷한 로직입니다. 동일한 Key이면 Node 를 새로운 노드로 바꾸고, 해시 충돌(hash collision)인 경우에는 Separate Chaining에 추가하거나 TreeNode에 추가합니다. `TREEIFY_THRESHOLD` 값에 따라 체이닝을 트리로 바꿉니다.
 

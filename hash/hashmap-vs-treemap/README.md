@@ -20,7 +20,7 @@ HashMap과 HashTable 사이에는 약간의 차이점이 있는데 이는 아래
 
 #### HashTable 클래스
 
-```
+```java
 public class Hashtable<K, V> extends Dictionary<K, V> implements Map<K, V>, Cloneable, java.io.Serializable {
     public synchronized int size() { }
     
@@ -45,7 +45,7 @@ Hashtable 클래스는 Thread-safe 하긴 하지만, 위와 같은 특징 때문
 
 #### HashMap 클래스
 
-```
+```java
 public class HashMap<K, V> extends AbstractMap<K, V> implemets Map<K, V>, Clonable, Serializable {
     public V get(Object key) { }
     public V put(K key, V value) { }
