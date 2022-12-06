@@ -16,6 +16,7 @@
   * [synchronized](hash/hashmap-vs-treemap/synchronized.md)
 * [ConcurrentHashMap](hash/concurrenthashmap/README.md)
   * [Compare And Swap](hash/concurrenthashmap/compare-and-swap.md)
+  * [C++ Concurrent\_XXX](hash/concurrenthashmap/c++-concurrent\_xxx.md)
 * [HashMap vs TreeMap](hash/hashmap-vs-treemap-1.md)
 * [HashSet](hash/hashset.md)
 * [HashSet vs TreeSet](hash/hashset-vs-treeset.md)
