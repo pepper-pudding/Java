@@ -40,9 +40,9 @@ iterator가 생성된 이후에, iterator 자체의 remove() 메서드를 통하
 
 ### Not Thread-Safe
 
-**HashSet은 동기화되지 않습니다.** 여러 스레드가 HashSet에 동시에 액세스하고 스레드 중 하나 이상이 HashSet을 수정하는 경우 외부에서 동기화해야 합니다_._
+**HashSet은 동기화되지 않습니다.** 여러 스레드가 TreeSet에 동시에 액세스하고 스레드 중 하나 이상이 TreeSet을 수정하는 경우 외부에서 동기화해야 합니다_._
 
-일반적으로 [Collections.synchronizedSortedSet](https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedSortedSet\(java.util.SortedSet\)) 메서드를 사용하여 HashSet을 래핑하는 방식을 통해 우발적인 비동기 엑세스를 방지합니다.
+일반적으로 [Collections.synchronizedSortedSet](https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedSortedSet\(java.util.SortedSet\)) 메서드를 사용하여 TreeSet을 래핑하는 방식을 통해 우발적인 비동기 엑세스를 방지합니다.
 
 ```java
    Set s = Collections.synchronizedSortedSet(new TreeSet(...));

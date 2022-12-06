@@ -1,3 +1,7 @@
+---
+description: 수행 시간에 몰빵!
+---
+
 # Hash Map
 
 ## HashMap
@@ -203,9 +207,25 @@ void transfer(Entry[] newTable, boolean rehash) {
 }
 ```
 
+
+
 ## 보조 해시 함수
 
 
+
+
+
+## HashMap의 특징
+
+### Not Thread-Safe
+
+**HashMap은 동기화되지 않습니다.** 여러 스레드가 HashMap에 동시에 액세스하고 스레드 중 하나 이상이 HashMap을 수정하는 경우 외부에서 동기화해야 합니다_._
+
+일반적으로 [Collections.synchronizedMap](https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedMap\(java.util.Map\)) 메서드를 사용하여 HashMap을 래핑하는 방식을 통해 우발적인 비동기 엑세스를 방지합니다.
+
+```java
+   Map map = Collections.synchronizedMap(new HashMap(...));
+```
 
 ## 참고자료
 
