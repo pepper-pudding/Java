@@ -33,7 +33,7 @@ public class Hashtable<K, V> extends Dictionary<K, V> implements Map<K, V>, Clon
 }
 ```
 
-Hashtable 클래스의 대부분의 API를 보면 위와 같이 메소드 전체에 synchronized 키워드가 존재하는 것을 볼 수 있습니다. (메소드 전체가 임계 구역으로 설정됩니다.)
+Hashtable 클래스의 대부분의 API를 보면 위와 같이 메소드 전체에 synchronized 키워드가 존재하는 것을 볼 수 있습니다. (synchronized method, 메소드 전체가 임계 구역으로 설정됩니다.)
 
 {% content-ref url="synchronized.md" %}
 [synchronized.md](synchronized.md)
@@ -44,6 +44,8 @@ Hashtable 클래스의 대부분의 API를 보면 위와 같이 메소드 전체
 하지만 동시에 작업을 하려고 해도 객체마다 Lock을 하나씩 가지고 있기 때문에 동시에 여러 작업을 해야할 때 병목현상이 발생할 수 밖에 없습니다. (메소드에 접근하게 되면 다른 쓰레드는 Lock을 얻을 때까지 기다려야 하기 때문입니다.)
 
 Hashtable 클래스는 Thread-safe 하긴 하지만, 위와 같은 특징 때문에 멀티쓰레드 환경에서 사용하기에도 살짝 느리다는 단점이 있습니다. 또한 Collection Framework가 나오기 이전부터 존재하는 클래스이기 때문에 최근에는 잘 사용하지 않는 클래스입니다.
+
+
 
 #### HashMap 클래스
 
