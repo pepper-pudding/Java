@@ -47,6 +47,4 @@
 
 {% embed url="https://www.grepiu.com/post/9" %}
 
-{% embed url="https://www.baeldung.com/java-collections-complexity" %}
-
 {% embed url="https://goodteacher.tistory.com/112" %}
