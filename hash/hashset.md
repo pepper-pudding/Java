@@ -10,13 +10,7 @@ HashSet은 Set 인터페이스의 구현 클래스입니다. 그렇기에 Set의
 
 
 
-Set 인터페이스를 구현한 클래스로는 HashSet과 TreeSet이 있는데 **HashSet의 경우 정렬을 해주지 않고** TreeSet의 경우 자동 정렬을 해준다는 차이점이 있습니다.&#x20;
-
-Set의 가장 큰 장점은 **중복을 자동으로 제거**해준다는 점입니다.
-
-
-
-### HashSet의 구현
+## HashSet의 구현
 
 * HashSet = HashMap (key = data, value = dummy static object)
 
@@ -68,6 +62,16 @@ Map은 key와 value 모두 필요합니다. 그런데 HashSet은 외부에서 ke
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption><p>HashSet끼리 공유</p></figcaption></figure>
 
+##
+
+## HashSet의 특징
+
+Set 인터페이스를 구현한 클래스로는 HashSet과 TreeSet이 있는데 **HashSet의 경우 정렬을 해주지 않고** TreeSet의 경우 자동 정렬을 해준다는 차이점이 있습니다.&#x20;
+
+Set의 가장 큰 장점은 **중복을 자동으로 제거**해준다는 점입니다.
+
+
+
 ### 중복을 제거하는 방법
 
 HashSet은 객체를 저장하기 전에 먼저 객체의 hashCode() 메소드를 호출해서 해시 코드를 얻어낸 다음 저장되어 있는 객체들의 해시 코드와 비교합니다. 같은 해시 코드가 있다면 다시 equals() 메소드로 두 객체를 비교해서 true가 나오면 동일한 객체로 판단하고 중복 저장을 하지 않습니다.
@@ -111,7 +115,7 @@ iterator가 생성된 이후에, iterator 자체의 remove() 메서드를 통하
 일반적으로 [`Collections.synchronizedSet`](https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#synchronizedSet\(java.util.Set\)) 메서드를 사용하여 HashSet을 래핑하는 방식을 통해 우발적인 비동기 엑세스를 방지합니다.
 
 ```java
-   Set s = Collections.synchronizedSet(new HashSet(...));
+   SortedSet s = Collections.synchronizedSet(new HashSet(...));
 ```
 
 
