@@ -96,7 +96,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
 
 이것을 좀 더 정리해보면 ConcurrentHashMap은 **읽기 작업에는 여러 쓰레드가 동시에 읽을 수 있지만, 쓰기 작업에는 특정 세그먼트 or 버킷에 대한 Lock을 사용한다**는 것입니다.
 
-```java
+```
 public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
     implements ConcurrentMap<K,V>, Serializable {
 
@@ -121,7 +121,7 @@ DEFAULT\_CAPACITY는 HashMap에서 보았듯이 버킷의 수입니다. 그리�
 
 putVal()  메소드를 조금 더 상세히 알아보겠습니다.
 
-#### 1. 빈 해시 버킷에 노드를 삽입하는 경우
+#### 1. 빈 해시 커빗에 노드를 삽입하는 경우
 
 * Lock을 사용하지 않고 [Compare and Swap](https://jenkov.com/tutorials/java-concurrency/compare-and-swap.html)을 이용하여 새로운 노드를 해시 버킷에 삽입합니다. (원자성 보장)
 * (Java에는 synchronized 말고도 다른 동기화 방식이 있는데 그 중에 하나를 사용한 것입니다.)
@@ -160,7 +160,7 @@ synchronized 안의 로직은 HashMap 과 비슷한 로직입니다. 동일한 K
 
 ## &#x20;ConcurrentHashMap 생성자
 
-```java
+```
 public ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
     if (!(loadFactor > 0.0f) || initialCapacity < 0 || concurrencyLevel <= 0)
         throw new IllegalArgumentException();

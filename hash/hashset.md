@@ -86,11 +86,21 @@ $$
 
 에 비례하는 시간이 필요합니다. 따라서 iterate 성능이 중요한 경우 초기 용량을 너무 높게(또는 부하 계수를 너무 낮게) 설정하지 않는 것이 매우 중요합니다.&#x20;
 
-HashSet의 iterate 메서드에 의해 반환된 iterator들은 fail-fast 방식을 따릅니다.
 
 
+### Slower than List to add or remove
 
 비선형 구조이기에 순서가 없으며 인덱스도 존재하지 않습니다. 그렇기 때문에 값을 추가하거나 삭제할 때에는 추가 혹은 삭제하고자 하는 값이 Set 내부에 있는지 먼저 검색을 한 다음에 수행해야 하므로 List 구조에 비해 속도가 느립니다.
+
+
+
+### Iterator : fail-fast
+
+HashSet의 iterate 메서드에 의해 반환된 iterator들은 fail-fast 방식을 따릅니다.&#x20;
+
+iterator가 생성된 이후에, iterator 자체의 remove() 메서드를 통하지 않고 어떤 방식으로든 HashSet이 수정된 경우 iterator는 [ConcurrentModificationException](https://docs.oracle.com/javase/7/docs/api/java/util/ConcurrentModificationException.html)을 던집니다.
+
+동기화되지 않은 동시 수정이 있는 경우 HashSet은 어떤 확실한 보증도 해줄 수 없기 때문에 최선의 노력으로 ConcurrentModificationException을 발생시킵니다.
 
 
 
@@ -103,12 +113,6 @@ HashSet의 iterate 메서드에 의해 반환된 iterator들은 fail-fast 방식
 ```java
    Set s = Collections.synchronizedSet(new HashSet(...));
 ```
-
-이 클래스의 반복자 메서드에 의해 반환된 반복자는 _빠른 속도로 실행 됩니다. 반복자가 생성된 후 반복자 자체의_ remove 메서드 를 통하지 않고 어떤 방식으로든 집합이 수정되면 반복자는 [`ConcurrentModificationException`](https://docs.oracle.com/javase/7/docs/api/java/util/ConcurrentModificationException.html). 따라서 동시 수정에 직면하여 반복자는 미래의 결정되지 않은 시간에 임의의 비결정적 동작을 위험에 빠뜨리기보다는 빠르고 깔끔하게 실패합니다.
-
-Iterator의 fail-fast 동작은 일반적으로 동기화되지 않은 동시 수정이 있는 경우 어떤 확실한 보증도 할 수 없기 때문에 보장할 수 없습니다. Fail-fast 반복자 는 최선의 노력으로 ConcurrentModificationException 을 발생시킵니다. 따라서 정확성을 위해 이 예외에 의존하는 프로그램을 작성하는 것은 잘못된 것입니다. _반복자의 빠른 실패 동작은 버그를 감지하는 데에만 사용해야 합니다._
-
-이 클래스는 [Java Collections Framework](https://docs.oracle.com/javase/7/docs/technotes/guides/collections/index.html) 의 멤버입니다.
 
 
 

@@ -1,14 +1,12 @@
 ---
-description: HashMap은 정렬이 되지 않고, TreeMap은 정렬이 된다.
+description: HashMap vs TreeMap에 대해 할 말 다 하시오.
 ---
 
 # HashMap vs TreeMap
 
-## 차이점
-
-|                                      | HashMap                                                  | TreeMap |
-| ------------------------------------ | -------------------------------------------------------- | ------- |
-| <mark style="color:red;">Sort</mark> | X <mark style="color:green;">(Use LinkedHashMap!)</mark> | O       |
-| Thread-Safe                          | X                                                        | ?       |
-|                                      |                                                          |         |
+|             | HashMap                                                  | TreeMap |
+| ----------- | -------------------------------------------------------- | ------- |
+| Sort        | X <mark style="color:green;">(Use LinkedHashMap!)</mark> | O       |
+| Thread-Safe | X                                                        | ?       |
+|             |                                                          |         |
 
