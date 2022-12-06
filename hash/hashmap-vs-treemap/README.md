@@ -16,6 +16,8 @@ HashMap과 HashTable 사이에는 약간의 차이점이 있는데 이는 아래
 |             nullable (key, value)             |     X     |    O    |
 | <p>Additional Hash Function<br>(보조 해시 함수)</p> |     X     |    O    |
 
+###
+
 ### Thread-Safety & Speed
 
 #### HashTable 클래스
