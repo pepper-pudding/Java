@@ -37,6 +37,6 @@
 * [LinkedList](linked/linkedlist.md)
 * [LinkedList의 구현](linked/linkedlist-1.md)
 * [ArrayList vs LinkedList](linked/arraylist-vs-linkedlist.md)
-* [LinkedHashMap](linked/linkedhashmap.md)
+* [LinkedHashMap의 구현](linked/linkedhashmap.md)
 * [LinkedHashSet](linked/linkedhashset.md)
 * [ConcurrentLinkedQueue](linked/concurrentlinkedqueue.md)
