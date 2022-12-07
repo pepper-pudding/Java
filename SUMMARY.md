@@ -21,11 +21,17 @@
 * [HashSet](hash/hashset.md)
 * [HashSet vs TreeSet](hash/hashset-vs-treeset.md)
 
+## Multi
+
+* [MultiSet의 구현](multi/multiset.md)
+
 ## Tree
 
 * [TreeMap](tree/treemap/README.md)
   * [이진 탐색 트리 vs 레드-블랙 트리](tree/treemap/vs.md)
 * [TreeSet](tree/treeset.md)
+* [TreeMultiSet](tree/treemultiset/README.md)
+  * [AVL Tree](tree/treemultiset/avl-tree.md)
 
 ## Array
 
@@ -40,7 +46,3 @@
 * [LinkedHashMap의 구현](linked/linkedhashmap.md)
 * [LinkedHashSet](linked/linkedhashset.md)
 * [ConcurrentLinkedQueue](linked/concurrentlinkedqueue.md)
-
-## Multi
-
-* [MultiSet의 구현](multi/multiset.md)
