@@ -192,9 +192,7 @@ ConcurrentHashMap은 **다른 버킷이라면 동시에 쓸 수 있다**고 했�
 
 검색(get())에는 동기화가 적용되지 않으므로 업데이트 작업(put() or remove())과 겹칠 수 있습니다. 그래서 검색은 가장 최근에 완료된 업데이트 작업의 결과가 반영됩니다.
 
-### gameAnvil의 시행착오
 
-비좁은 통로
 
 {% embed url="https://www.youtube.com/watch?t=111s&v=MZmZGwFRM2U" %}
 12:53 결함 2. 비좁은 통로
