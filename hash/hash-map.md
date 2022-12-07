@@ -159,7 +159,7 @@ $$
 
 값도 작아져, 해시 충돌로 인한 성능 손실 문제를 어느 정도 해결할 수 있습니다.
 
-해시 버킷 개수의 기본값은 16이고, 데이터의 개수가 임계점에 이를 때마다 해시 버킷 개수의 크기를 두 배씩 증가시킵니다. 버킷의 최대 개수는 230개입니다. 그런데 이렇게 버킷 개수가 두 배로 증가할 때마다, 모든 키-값 데이터를 읽어 새로운 Separate Chaining을 구성해야 하는 문제가 있습니다.&#x20;
+해시 버킷 개수의 기본값은 16이고, 데이터의 개수가 임계점에 이를 때마다 해시 버킷 개수의 크기를 두 배씩 증가시킵니다. 버킷의 최대 개수는 2^30개입니다. 그런데 이렇게 버킷 개수가 두 배로 증가할 때마다, 모든 키-값 데이터를 읽어 새로운 Separate Chaining을 구성해야 하는 문제가 있습니다.&#x20;
 
 HashMap 생성자의 인자로 초기 해시 버킷 개수를 지정할 수 있으므로, 해당 HashMap 객체에 저장될 데이터의 개수가 어느 정도인지 예측 가능한 경우에는 이를 생성자의 인자로 지정하면 불필요하게 Separate Chaining을 재구성하지 않게 할 수 있습니다.
 
@@ -168,7 +168,7 @@ void resize(int newCapacity) {
     Entry[] oldTable = table;
     int oldCapacity = oldTable.length;
 
-    // MAXIMIM_CAPACITY는 230이다.
+    // MAXIMIM_CAPACITY는 2^30이다.
     if (oldCapacity == MAXIMUM_CAPACITY) {
         threshold = Integer.MAX_VALUE;
         return;
@@ -206,6 +206,8 @@ void transfer(Entry[] newTable, boolean rehash) {
     }
 }
 ```
+
+해시 버킷 크기를 두 배로 확장하는 임계점은 현재의 데이터 개수가 **'load factor \* 현재의 해시 버킷 개수'**에 이를 때입니다.
 
 
 
