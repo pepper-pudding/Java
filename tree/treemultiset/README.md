@@ -1,5 +1,7 @@
 # TreeMultiSet
 
+{% embed url="http://www.promtools.org/prom6/nightly/doc/org/processmining/framework/util/collection/TreeMultiSet.html" %}
+
 ## 생성자
 
 ```java
