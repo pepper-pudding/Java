@@ -8,7 +8,7 @@
 
 ### Separate Chaining
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 해시 테이블의 기본 방식이기도 한 개별 체이닝(Separate Chaining)은 충돌 발생 시 그림과 같이 **연결 리스트로 연결하는 방식**이다.
 
